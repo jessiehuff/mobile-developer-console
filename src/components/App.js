@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter as Router, Switch, Redirect, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Redirect, Route, NavLink } from 'react-router-dom';
 import { OutlinedQuestionCircleIcon } from '@patternfly/react-icons';
 import {
   Brand,
@@ -12,7 +12,11 @@ import {
   ToolbarItem,
   DropdownToggle,
   Dropdown,
-  DropdownItem
+  DropdownItem,
+  Nav,
+  NavList,
+  NavItem,
+  NavVariants
 } from '@patternfly/react-core';
 import Overview from '../containers/Overview';
 import Client from '../containers/Client';
@@ -40,6 +44,20 @@ class App extends React.Component {
   };
 
   render() {
+
+    const PageNav = (
+      <Nav aria-label="Nav">
+        <NavList variant={NavVariants.horizontal}>
+          <NavItem to="/overview"> 
+            <NavLink activeClassName="pf-m-current" to="/overview">Mobile Apps</NavLink>
+          </NavItem>
+          <NavItem to="/configuration">
+            <NavLink activeClassName="pf-m-current" to="/configuration">SDK Configuration</NavLink>
+          </NavItem>
+        </NavList>
+      </Nav>
+    );
+
     const userDropdownItems = [
       <DropdownItem key="mdc_logout">
         <a href="/oauth/sign_in">Logout</a>
@@ -92,18 +110,18 @@ class App extends React.Component {
           header={
             <PageHeader
               logo={<Brand src={getLogo()} alt="Mobile Developer Console Logo" style={{ width: '150px' }} />}
+              topNav={PageNav}
               toolbar={PageToolbar}
             />
           }
         >
-          <PageSection>
-            <Switch>
-              <Route exact path="/overview" component={Overview} />
-              <Route exact path="/mobileclient/:id" component={Client} />
-              {/* Default redirect */}
-              <Redirect to="/overview" />
-            </Switch>
-          </PageSection>
+          <Switch>
+            <Route exact path="/overview" component={Overview} />
+            <Route exact path="/mobileclient/:id" component={Client} />
+            <Route exact path="/configuration" component={Configuration} /> 
+            {/* Default redirect */}
+            <Redirect to="/overview" />
+          </Switch>
         </Page>
       </Router>
     );
