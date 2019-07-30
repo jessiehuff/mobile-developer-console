@@ -1,6 +1,6 @@
 import Moment from 'react-moment';
 import React from 'react';
-import { Card, CardHeader, CardBody, CardFooter, Dropdown, DropdownPosition, DropdownItem, KebabToggle } from '@patternfly/react-core'; 
+import { Card, CardHeader, CardBody, CardFooter, Dropdown, DropdownPosition, KebabToggle } from '@patternfly/react-core'; 
 import { Link } from 'react-router-dom';
 import DeleteItemButton from '../../containers/DeleteItemButton';
 

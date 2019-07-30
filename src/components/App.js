@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Switch, Redirect, Route, Link, NavLink } from 'react-router-dom';
-
 import { Page, Nav, NavList, NavItem, NavVariants, PageHeader, PageSection, Toolbar, ToolbarGroup, ToolbarItem, DropdownToggle, Dropdown, DropdownItem } from '@patternfly/react-core';
 import Overview from '../containers/Overview';
 import Client from '../containers/Client';
