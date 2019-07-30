@@ -109,8 +109,12 @@ class MobileClientCardView extends Component {
     const { mobileClients } = this.props;
     const filteredClients = this.filterClients(mobileClients);
     return filteredClients.length ? (
-      <Gallery mCardGridatchHeight fluid>
-        <GalleryItem key={1}>{filteredClients}</GalleryItem>
+      <Gallery gutter="md">
+        {filteredClients.map((x, i) => (
+          <GalleryItem key={i}>
+            {x}
+          </GalleryItem>
+        ))}
       </Gallery>
     ) : (
       <EmptyState>
