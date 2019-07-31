@@ -1,18 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Switch, Redirect, Route, Link, NavLink } from 'react-router-dom';
-import { Page, Nav, NavList, NavItem, NavVariants, PageHeader, PageSection, Toolbar, ToolbarGroup, ToolbarItem, DropdownToggle, Dropdown, DropdownItem } from '@patternfly/react-core';
+import { Brand, Page, Nav, NavList, NavItem, NavVariants, PageHeader, PageSection, Toolbar, ToolbarGroup, ToolbarItem, DropdownToggle, Dropdown, DropdownItem } from '@patternfly/react-core';
 import Overview from '../containers/Overview';
 import Client from '../containers/Client';
 import Configuration from '../containers/Configuration';
 import ErrorMessages from '../containers/ErrorMessages';
 import { fetchUserInfo } from '../actions/users';
-
+import { OutlinedQuestionCircleIcon  } from '@patternfly/react-icons';
 import './App.css';
 
 class App extends React.Component {
   state = {
-    isDropdownOpen: false
+    isDropdownOpen: false,
+    isIconOpen: false
   };
   
   componentWillMount() {
@@ -21,6 +22,10 @@ class App extends React.Component {
 
   onDropdownToggle = () => {
     this.setState({isDropdownOpen: !this.state.isDropdownOpen});
+  }
+
+  onIconToggle = () => {
+    this.setState({isIconOpen: !this.state.isIconOpen});
   }
 
   render() {
@@ -41,10 +46,23 @@ class App extends React.Component {
       <DropdownItem><a href="/oauth/sign_in">Logout</a></DropdownItem>,
     ];
 
+    const questionIconItems = [
+      <DropdownItem><a href="/">Documentation</a></DropdownItem>,
+      <DropdownItem><a href="/">About</a></DropdownItem>
+    ];
+
     const PageToolbar = (
       <Toolbar>
         <ToolbarGroup>
           <ToolbarItem>
+            <Dropdown 
+              isPlain
+              position="right"
+              isOpen={this.state.isIconOpen}
+              onSelect={this.onDropdownSelect}
+              toggle={<DropdownToggle onToggle={this.onIconToggle} iconComponent={null}><OutlinedQuestionCircleIcon /></DropdownToggle>}
+              dropdownItems={questionIconItems}
+            />
             <Dropdown
               isPlain
               position="right"
@@ -63,7 +81,7 @@ class App extends React.Component {
         <ErrorMessages />
         <Page
           header={<PageHeader
-            logo={<Link to="/overview">Mobile Developer Console</Link>}
+            logo={<Brand src="/img/logo.svg" alt="Mobile Developer Console Logo" />}
             topNav={PageNav}
             toolbar={PageToolbar}
           />}

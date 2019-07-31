@@ -1,6 +1,6 @@
 import Moment from 'react-moment';
 import React from 'react';
-import { Card, CardHeader, CardBody, CardFooter, Dropdown, DropdownPosition, KebabToggle } from '@patternfly/react-core'; 
+import { Card, CardActions, CardHead, CardHeader, CardBody, CardFooter, Dropdown, DropdownPosition, KebabToggle } from '@patternfly/react-core'; 
 import { Link } from 'react-router-dom';
 import DeleteItemButton from '../../containers/DeleteItemButton';
 
@@ -50,20 +50,24 @@ class MobileClientCardViewItem extends React.Component {
     } = this.props;
     return (
         <Card matchHeight /* accented */ className="mobile-client-card">
-          <CardHeader>
-            <Dropdown id={appName}
-              position={DropdownPosition.right}
-              onSelect={this.onSelect}
-              toggle={<KebabToggle onToggle={this.onToggle} />}
-              isOpen={this.state.isOpen}
-              isPlain
-              dropdownItems={[<DeleteItemButton itemType="app" itemName={appName} item={app} />]} />
-            <Link to={`/mobileclient/${appName}`}>
-              <div className="card-pf-title">
-                <h1>{appName}</h1>
-              </div>
-            </Link>
-          </CardHeader>
+          <CardHead>
+            <CardActions>
+              <CardHeader>
+                <Link to={`/mobileclient/${appName}`}>
+                  <div className="card-pf-title">
+                    <h1>{appName}</h1>
+                  </div>
+                </Link>
+              </CardHeader>
+              <Dropdown id={appName}
+                position={'right'}
+                onSelect={this.onSelect}
+                toggle={<KebabToggle onToggle={this.onToggle} />}
+                isOpen={this.state.isOpen}
+                isPlain
+                dropdownItems={[<DeleteItemButton itemType="app" itemName={appName} item={app} />]} />
+            </CardActions>
+          </CardHead>
           <Link to={`/mobileclient/${appName}`}>
             <CardBody>
               <div className="card-icons">
@@ -71,10 +75,9 @@ class MobileClientCardViewItem extends React.Component {
               </div>
             </CardBody>
             <CardFooter>
-              <div className="creation-timestamp">CREATED</div>
-              <span className="creation-timestamp">
-                <span className="fa fa-globe" /> <Moment format="DD/MM/YYYY">{app.metadata.creationTimestamp}</Moment>
-              </span>
+              <div className="creation-timestamp">Created 
+                 <Moment format=" DD MMMM YYYY">{app.metadata.creationTimestamp}</Moment>
+              </div>
               <span className="builds">
                 {buildTabEnabled && builds.numFailedBuilds > 0 ? (
                   <span>
