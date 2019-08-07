@@ -61,12 +61,12 @@ class MobileClientCardViewItem extends React.Component {
                 dropdownItems={[<DeleteItemButton itemType="app" itemName={appName} item={app} />]} />
             </CardActions>
             <CardHeader>
-            <Link to={`/mobileclient/${appName}`}>
-            <div className="card-pf-title">
-              <h1>{appName}</h1>
-            </div>
-            </Link>
-          </CardHeader>
+              <Link to={`/mobileclient/${appName}`}>
+              <div className="card-pf-title">
+                <h1>{appName}</h1>
+              </div>
+              </Link>
+            </CardHeader>
           </CardHead>
           <Link to={`/mobileclient/${appName}`}>
             <CardBody>
