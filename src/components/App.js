@@ -30,7 +30,6 @@ class App extends React.Component {
     isDropdownOpen: false,
     isIconOpen: false
   };
-
   componentWillMount() {
     this.props.fetchUserInfo();
   }
@@ -110,7 +109,6 @@ class App extends React.Component {
           header={
             <PageHeader
               logo={<Brand src={getLogo()} alt="Mobile Developer Console Logo" style={{ width: '150px' }} />}
-              topNav={PageNav}
               toolbar={PageToolbar}
             />
           }
@@ -118,7 +116,6 @@ class App extends React.Component {
           <Switch>
             <Route exact path="/overview" component={Overview} />
             <Route exact path="/mobileclient/:id" component={Client} />
-            <Route exact path="/configuration" component={Configuration} /> 
             {/* Default redirect */}
             <Redirect to="/overview" />
           </Switch>
