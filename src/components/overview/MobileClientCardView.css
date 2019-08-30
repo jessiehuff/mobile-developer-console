@@ -6,6 +6,7 @@
   border-width: 0; }
 
 .mobile-client-card {
+  min-height: 210px; 
   margin: 0 0 20px 0; }
   .mobile-client-card a {
     color: #393f44;
