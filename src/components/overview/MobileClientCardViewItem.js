@@ -3,7 +3,7 @@ import React from 'react';
 import { Card, CardActions, CardHead, CardHeader, CardBody, CardFooter, Dropdown, DropdownPosition, KebabToggle } from '@patternfly/react-core'; 
 import { Link } from 'react-router-dom';
 import DeleteItemButton from '../../containers/DeleteItemButton';
-import './MobileClientCardViewItem.css';
+import './MobileClientCardView.css';
 
 const getServiceIcons = services => {
   const icons = {
@@ -63,19 +63,17 @@ class MobileClientCardViewItem extends React.Component {
             </CardActions>
             <CardHeader>
             <Link to={`/mobileclient/${appName}`}>
-            <div className="card-pf-title">
               <b>{appName}</b>
-            </div>
             </Link>
           </CardHeader>
           </CardHead>
-          <Link to={`/mobileclient/${appName}`}>
-            <CardBody>
+          <CardBody style={{ paddingTop: 0 }}>
               {services && services.length > 0 ? "Bound Services" : ""}
               <div className="card-icons">
                 {services && services.length > 0 ? getServiceIcons(services) : <div className="service-icon" />}
               </div>
             </CardBody>
+            <Link to={`/mobileclient/${appName}`}>
             <CardFooter>
               <div className="creation-timestamp">Created 
                  <Moment format=" DD MMMM YYYY">{app.metadata.creationTimestamp}</Moment>
